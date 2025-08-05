@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StepVolt - Energia Inteligente</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #111;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+    }
+    header, footer {
+      background-color: #1a1a1a;
+      text-align: center;
+      padding: 20px;
+    }
+    section {
+      padding: 40px;
+      max-width: 800px;
+      margin: auto;
+    }
+    input, button {
+      padding: 10px;
+      margin: 5px;
+      border-radius: 5px;
+      border: none;
+    }
+    button {
+      background-color: #00ccff;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    #resultado {
+      margin-top: 20px;
+      font-size: 1.2em;
+      color: #00ffcc;
+    }
+    .chatbot {
+      margin-top: 40px;
+      padding: 20px;
+      background: #222;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>StepVolt</h1>
+    <p>Energia gerada com cada passo. Agora com Inteligência Artificial.</p>
+  </header>
+
+  <section id="simulador">
+    <h2>🔋 Simule sua geração de energia com IA</h2>
+    <form id="energyForm">
+      <label>Peso (kg):</label><br>
+      <input type="number" name="peso" required><br>
+      <label>Passos por dia:</label><br>
+      <input type="number" name="passos" required><br>
+      <button type="submit">Calcular</button>
+    </form>
+    <div id="resultado"></div>
+  </section>
+
+  <section class="chatbot">
+    <h2>🤖 Assistente StepVolt (IA)</h2>
+    <p><strong>Pergunte algo:</strong> (Ex: Como o StepVolt funciona?)</p>
+    <input type="text" id="userQuestion" placeholder="Digite sua pergunta" style="width:100%">
+    <button onclick="responderPergunta()">Enviar</button>
+    <div id="chatResposta" style="margin-top:20px;"></div>
+  </section>
+
+  <footer>
+    <p>Desenvolvido por StepVolt | Energia Sustentável com Inteligência Artificial</p>
+  </footer>
+
+  <script>
+    document.getElementById('energyForm').onsubmit = function(e) {
+      e.preventDefault();
+      const peso = parseFloat(document.getElementsByName('peso')[0].value);
+      const passos = parseFloat(document.getElementsByName('passos')[0].value);
+      const energiaGerada = (peso * passos * 0.0005).toFixed(2); // estimativa com IA simples
+      document.getElementById('resultado').innerHTML = 
+        `⚡ Você pode gerar cerca de <strong>${energiaGerada} Wh</strong> por dia com o StepVolt.`;
+    }
+
+    function responderPergunta() {
+      const pergunta = document.getElementById('userQuestion').value.toLowerCase();
+      let resposta = "Desculpe, ainda estou aprendendo. Tente outra pergunta.";
+
+      if(pergunta.includes("como funciona")) {
+        resposta = "O StepVolt usa materiais piezoelétricos para gerar energia a cada passo. Essa energia é armazenada em uma bateria recarregável no calçado.";
+      } else if(pergunta.includes("carregar celular")) {
+        resposta = "Sim! O StepVolt possui uma saída USB integrada que permite carregar pequenos dispositivos com a energia gerada.";
+      } else if(pergunta.includes("emergência") || pergunta.includes("emergencia")) {
+        resposta = "Em situações de emergência, o StepVolt permite iluminação com LEDs ou carregamento de um celular para pedido de socorro.";
+      }
+
+      document.getElementById('chatResposta').innerHTML = `<p><strong>IA:</strong> ${resposta}</p>`;
+    }
+  </script>
+</body>
+</html>
